@@ -1,5 +1,5 @@
 # SURFMNet
-code and data associated with the paper "Unsupervised Deep Learning for Structured Shape Matching"
+Source code and data associated with the ICCV'19 oral paper "Unsupervised Deep Learning for Structured Shape Matching"
 
 
 Please first download the data from these links:
