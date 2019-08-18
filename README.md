@@ -9,7 +9,7 @@ The code is tested under TF1.6 GPU version and Python 3.6 on Ubuntu 16.04, with 
 
 ### Prepare Your Own Data
 
-Please run ./Prepare_data.sh
+Please run  bash Prepare_data.sh
 
 ### Shape Matching
 
