@@ -29,3 +29,8 @@ Visualization of functional maps at each training step is possible with tensorbo
 ### Download GT Correspondence and precomputed pairwise matches for some baselines
 
 https://drive.google.com/open?id=1qvqtJz-_zvMxC0ZMuFGbtlKxc9Py3Ggg
+
+### Download Geodesic Matrices for Faust and Scape remesh from here:
+
+https://www.dropbox.com/home?preview=Faust_r_test.zip
+https://www.dropbox.com/home?preview=scape_test.zip
