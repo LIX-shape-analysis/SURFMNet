@@ -22,10 +22,10 @@ flags.DEFINE_integer('dim_shot', 352, '')
 flags.DEFINE_string('targets_dir', '../UnsupervisedFMapNet/Scr/Unsupervised_FMnet/Shapes/SCAPE_r/MAT_SHOT/',
                     'directory with shapes')
 flags.DEFINE_string('files_name', 'mesh', 'name common to all the shapes')
-flags.DEFINE_string('log_dir', './Training/SCAPE_r/1500/',
+flags.DEFINE_string('log_dir', './Training/SCAPE_r/3000/',
                     'directory to save models and results')
 flags.DEFINE_integer('max_train_iter', 10000, '')
-flags.DEFINE_integer('num_vertices', 1500, '')
+flags.DEFINE_integer('num_vertices', 3000, '')
 flags.DEFINE_integer('save_summaries_secs', 500, '')
 flags.DEFINE_integer('save_model_secs', 500, '')
 
