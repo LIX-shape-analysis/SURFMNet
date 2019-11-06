@@ -34,3 +34,6 @@ https://drive.google.com/open?id=1qvqtJz-_zvMxC0ZMuFGbtlKxc9Py3Ggg
 
 https://www.dropbox.com/home?preview=Faust_r_test.zip
 https://www.dropbox.com/home?preview=scape_test.zip
+
+### Coming soon
+Pre-trained model and evaluation script.
