@@ -9,33 +9,30 @@ from DFMnet import *
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
-
 # Training parameterss
 flags.DEFINE_float('learning_rate', 1e-3, 'initial learning rate.')
-flags.DEFINE_integer('batch_size', 4, 'batch size.')
+flags.DEFINE_integer('batch_size', 10, 'batch size.')
 
 # Architecture parameters
 flags.DEFINE_integer('num_layers', 7, 'network depth')
-flags.DEFINE_integer('num_evecs', 120,
-                     "number of eigenvectors used for representation")
+flags.DEFINE_integer('num_evecs', 120, "number of eigenvectors used for representation")
 flags.DEFINE_integer('dim_shot', 352, '')
 
 # Data parameters
-flags.DEFINE_string('targets_dir', './Shapes/',
+flags.DEFINE_string('targets_dir', '../UnsupervisedFMapNet/Scr/Unsupervised_FMnet/Shapes/SCAPE_r/MAT_SHOT/',
                     'directory with shapes')
-flags.DEFINE_string('files_name', 'tr_reg_', 'name common to all the shapes')
-flags.DEFINE_string('log_dir', './Training/',
+flags.DEFINE_string('files_name', 'mesh', 'name common to all the shapes')
+flags.DEFINE_string('log_dir', './Training/SCAPE_r/1500/',
                     'directory to save models and results')
-flags.DEFINE_integer('max_train_iter', 5000, '')
+flags.DEFINE_integer('max_train_iter', 10000, '')
 flags.DEFINE_integer('num_vertices', 1500, '')
 flags.DEFINE_integer('save_summaries_secs', 500, '')
 flags.DEFINE_integer('save_model_secs', 500, '')
 
 # Globals
-train_subjects = [0]
-flags.DEFINE_integer('num_poses_per_subject_total', 10, '')
-
-
+n_tr = 51
+train_subjects,test_subjects = (list(range(n_tr)) + list(range(52,60)),range(60,70))
+#train_subjects = list(range(n_tr))
 def get_input_pair(batch_size, num_vertices):
     batch_input = {
         'source_evecs': np.zeros((batch_size, num_vertices, FLAGS.num_evecs)),
@@ -53,13 +50,10 @@ def get_input_pair(batch_size, num_vertices):
                    }
 
     for i_batch in range(batch_size):
-        i_subject1 = np.random.choice(train_subjects)
-        i_subject2 = np.random.choice(train_subjects)
-        i_target = FLAGS.num_poses_per_subject_total * i_subject1 + \
-        np.random.randint(0, FLAGS.num_poses_per_subject_total, 1)[0]
-        i_source = FLAGS.num_poses_per_subject_total * i_subject2 + \
-        np.random.randint(0, FLAGS.num_poses_per_subject_total, 1)[0]
-
+        i_source = np.random.choice(range(n_tr))
+        i_target = np.random.choice(range(n_tr))          
+        
+        
         batch_input_ = get_pair_from_ram(i_target, i_source)
 
         batch_input_['source_labels'] = range(
@@ -132,22 +126,17 @@ def load_targets_to_ram():
     global targets_train
     targets_train = {}
 
-    for i_subject in train_subjects:
-        for i_target in range(
-                          i_subject * FLAGS.num_poses_per_subject_total,
-                          FLAGS.num_poses_per_subject_total * (i_subject + 1)):
-            target_file = FLAGS.targets_dir + \
-                          FLAGS.files_name + \
-                          '%.3d.mat' % (i_target)
-            input_data = sio.loadmat(target_file)
-            evecs = input_data['target_evecs'][:, 0:FLAGS.num_evecs]
-            evecs_trans = input_data['target_evecs_trans'][0:FLAGS.num_evecs,
-                                                           :]
-            evals = input_data['target_evals'][0:FLAGS.num_evecs]
-            input_data['target_evecs'] = evecs
-            input_data['target_evecs_trans'] = evecs_trans
-            input_data['target_evals'] = evals
-            targets_train[i_target] = input_data
+    for i_target in train_subjects:
+        
+        target_file = FLAGS.targets_dir + FLAGS.files_name + '%.3d.mat' % (i_target)
+        input_data = sio.loadmat(target_file)
+        evecs = input_data['target_evecs'][:, 0:FLAGS.num_evecs]
+        evecs_trans = input_data['target_evecs_trans'][0:FLAGS.num_evecs,:]
+        evals = input_data['target_evals'][0:FLAGS.num_evecs]
+        input_data['target_evecs'] = evecs
+        input_data['target_evecs_trans'] = evecs_trans
+        input_data['target_evals'] = evals
+        targets_train[i_target] = input_data
 
 
 def run_training():
@@ -235,10 +224,8 @@ def run_training():
             while not sv.should_stop() and iteration < FLAGS.max_train_iter:
                 iteration += 1
                 start_time = time.time()
-
                 input_data = get_input_pair(FLAGS.batch_size,
                                             FLAGS.num_vertices)
-
                 feed_dict = {
                     phase: True,
                     source_shot: input_data['source_shot'],
@@ -251,18 +238,15 @@ def run_training():
                     target_evals: input_data['target_evals']
                              }
 
-                summaries, step, my_loss, safeguard, _ = sess.run(
-                  [merged, global_step, net_loss, safeguard_inverse, train_op],
-                  feed_dict=feed_dict
-                                                                  )
+                summaries, step, my_loss, safeguard, _ = sess.run([merged, global_step, net_loss, safeguard_inverse, train_op],
+                  feed_dict=feed_dict)
                 writer.add_summary(summaries, step)
                 summary_ = sess.run(summary)
                 writer.add_summary(summary_, step)
 
                 duration = time.time() - start_time
                 print('train - step %d: loss = %.2f (%.3f sec)'
-                      % (step, my_loss, duration)
-                      )
+                      % (step, my_loss, duration))
 
             saver.save(sess, FLAGS.log_dir + '/model.ckpt', global_step=step)
             writer.flush()
