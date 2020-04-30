@@ -34,5 +34,4 @@ https://drive.google.com/open?id=1qvqtJz-_zvMxC0ZMuFGbtlKxc9Py3Ggg
 https://www.dropbox.com/home?preview=Faust_r_test.zip
 https://www.dropbox.com/home?preview=scape_test.zip
 
-### Coming soon
-Pre-trained model and evaluation script.
+If the dropbox link do not work, please send an email to kein.iitian@gmail.com to dowload Geodesic Matrices.
