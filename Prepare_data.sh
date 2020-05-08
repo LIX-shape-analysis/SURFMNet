@@ -11,8 +11,8 @@ unzip Shapes/FAUST_remesh.zip && rm Shapes/FAUST_remesh.zip
 #cd ..
 
 #cd Shapes
-./gdown.pl 'https://drive.google.com/open?id=1Gs8Nrt7F_Sd66jsks2h_Q3mSShM-uXvv' Shapes/Scape_remesh.zip
-unzip Shapes/Scape_remesh.zip && rm Shapes/Scape_remesh.zip
+./gdown.pl 'https://drive.google.com/open?id=1buvpvfoxcp0JPaUUXpZLlpf400ZIUU1V' Shapes/Scape_remesh.zip
+#unzip Shapes/Scape_remesh.zip && rm Shapes/Scape_remesh.zip
 #cd ..
 
 
