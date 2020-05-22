@@ -64,7 +64,7 @@ def run_test():
     Ct_est = graph.get_tensor_by_name(
                     'matrix_solve_ls/cholesky_solve/MatrixTriangularSolve_1:0'
                                       )
-
+    os.mkdir(matches_dir)
     for i in range(60, 69):
         input_data_source = get_test_pair_source(FLAGS.files_name + '%.3d' % i)
         source_evecs_ = input_data_source['source_evecs'][:, 0:FLAGS.num_evecs]
