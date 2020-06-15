@@ -30,8 +30,8 @@ Visualization of functional maps at each training step is possible with tensorbo
 https://drive.google.com/open?id=1qvqtJz-_zvMxC0ZMuFGbtlKxc9Py3Ggg
 
 ### Download Geodesic Matrices for Faust and Scape remesh from here:
+https://www.dropbox.com/s/ryvc1b0c3gnz2ju/Faust_r_test.zip?dl=0
+https://www.dropbox.com/s/ysrctegmqgpo72z/scape_test.zip?dl=0
 
-https://www.dropbox.com/home?preview=Faust_r_test.zip
-https://www.dropbox.com/home?preview=scape_test.zip
 
 If the dropbox link do not work, please send an email to kein.iitian@gmail.com to dowload Geodesic Matrices.
