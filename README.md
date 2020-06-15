@@ -34,4 +34,4 @@ https://www.dropbox.com/s/ryvc1b0c3gnz2ju/Faust_r_test.zip?dl=0
 https://www.dropbox.com/s/ysrctegmqgpo72z/scape_test.zip?dl=0
 
 
-If the dropbox link do not work, please send an email to kein.iitian@gmail.com to dowload Geodesic Matrices.
+For any further question, please send an email to kein.iitian@gmail.com.
