@@ -76,7 +76,7 @@ def dfmnet_model(
 
     #  Evaluate loss without any ground-truth or geodesic distance matrix
     with tf.variable_scope("func_map_loss"):
-        net_loss, E1, E2, E3, E4 = func_map_layer(
+        net_loss, E1, E2, E3 = func_map_layer(
                                 net['C_est_AB'], net['C_est_BA'],
                                 source_evecs, source_evecs_trans, source_evals,
                                 target_evecs, target_evecs_trans, target_evals,
@@ -86,7 +86,7 @@ def dfmnet_model(
     tf.summary.scalar('net_loss_Bijectivity', E1)
     tf.summary.scalar('net_loss_Orthogonality', E2)
     tf.summary.scalar('net_loss_LaplacianCommutativity', E3)
-    tf.summary.scalar('net_loss_DescriptorCommutativity', E4)
+    #tf.summary.scalar('net_loss_DescriptorCommutativity', E4)
     tf.summary.scalar('net_loss', net_loss)
     merged = tf.summary.merge_all()
 
