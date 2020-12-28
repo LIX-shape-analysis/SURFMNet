@@ -173,24 +173,17 @@ def func_map_layer(
                                         target_evals,
                                         source_evals))/2
 
-    E4 = (penalty_desc_commutativity(
-                                C_est_AB,
-                                F, G,
-                                source_evecs, source_evecs_trans,
-                                target_evecs, target_evecs_trans) +
-          penalty_desc_commutativity(
-                                C_est_BA,
-                                G, F,
-                                target_evecs, target_evecs_trans,
-                                source_evecs, source_evecs_trans))/2
+    #commenting out E4 as it gives an error with a new tf version
+    #E4 = (penalty_desc_commutativity(C_est_AB,F, G,source_evecs, source_evecs_trans,target_evecs, target_evecs_trans) +
+          #penalty_desc_commutativity(C_est_BA,G, F,target_evecs, target_evecs_trans,source_evecs, source_evecs_trans))/2
     # This line for E4 can take a lot of memory depending
     # on the batch size chosen and/or the number of descriptors
 
     ########
     # LOSS #
     ########
-
-    loss = tf.reduce_mean(alpha * E1 + beta * E2 + gamma * E3 + delta * E4)
+    loss = tf.reduce_mean(alpha * E1 + beta * E2 + gamma * E3 )
+    #loss = tf.reduce_mean(alpha * E1 + beta * E2 + gamma * E3 + delta * E4)
     loss /= tf.to_float(tf.shape(C_est_AB)[1] * tf.shape(C_est_AB)[0])
 
     ##########################
@@ -206,6 +199,6 @@ def func_map_layer(
         C_est_BA,
         [FLAGS.batch_size, tf.shape(C_est_BA)[1], tf.shape(C_est_BA)[2], 1])
     tf.summary.image("Estimated_FuncMap_BA", C_est_BA, max_outputs=1)
-
-    return loss, E1, E2, E3, E4
+    return loss, E1,E2,E3
+    #return loss, E1, E2, E3, E4
 
