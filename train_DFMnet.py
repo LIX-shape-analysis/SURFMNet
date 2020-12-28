@@ -22,7 +22,7 @@ flags.DEFINE_integer('dim_shot', 352, '')
 flags.DEFINE_string('targets_dir', '../UnsupervisedFMapNet/Scr/Unsupervised_FMnet/Shapes/SCAPE_r/MAT_SHOT/',
                     'directory with shapes')
 flags.DEFINE_string('files_name', 'mesh', 'name common to all the shapes')
-flags.DEFINE_string('log_dir', './Training/SCAPE_r/3000/',
+flags.DEFINE_string('log_dir_', './Training/SCAPE_r/3000/',
                     'directory to save models and results')
 flags.DEFINE_integer('max_train_iter', 10000, '')
 flags.DEFINE_integer('num_vertices', 3000, '')
@@ -141,9 +141,9 @@ def load_targets_to_ram():
 
 def run_training():
 
-    print('log_dir=%s' % FLAGS.log_dir)
-    if not os.path.isdir(FLAGS.log_dir):
-        os.makedirs(FLAGS.log_dir)
+    print('log_dir_=%s' % FLAGS.log_dir_)
+    if not os.path.isdir(FLAGS.log_dir_):
+        os.makedirs(FLAGS.log_dir_)
     print('num_evecs=%d' % FLAGS.num_evecs)
 
     print('building graph...')
@@ -199,7 +199,7 @@ def run_training():
 
         saver = tf.train.Saver(max_to_keep=40)
         sv = tf.train.Supervisor(
-                                logdir=FLAGS.log_dir,
+                                logdir=FLAGS.log_dir_,
                                 init_op=tf.global_variables_initializer(),
                                 local_init_op=tf.local_variables_initializer(),
                                 global_step=global_step,
@@ -248,7 +248,7 @@ def run_training():
                 print('train - step %d: loss = %.2f (%.3f sec)'
                       % (step, my_loss, duration))
 
-            saver.save(sess, FLAGS.log_dir + '/model.ckpt', global_step=step)
+            saver.save(sess, FLAGS.log_dir_ + '/model.ckpt', global_step=step)
             writer.flush()
             sv.request_stop()
             sv.stop()
