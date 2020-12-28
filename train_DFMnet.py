@@ -209,7 +209,7 @@ def run_training():
                                 saver=saver
                                  )
 
-        writer = sv.summary_writer
+        #writer = sv.summary_writer
 
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -240,16 +240,16 @@ def run_training():
 
                 summaries, step, my_loss, safeguard, _ = sess.run([merged, global_step, net_loss, safeguard_inverse, train_op],
                   feed_dict=feed_dict)
-                writer.add_summary(summaries, step)
+                #writer.add_summary(summaries, step)
                 summary_ = sess.run(summary)
-                writer.add_summary(summary_, step)
+                #writer.add_summary(summary_, step)
 
                 duration = time.time() - start_time
                 print('train - step %d: loss = %.2f (%.3f sec)'
                       % (step, my_loss, duration))
 
             saver.save(sess, FLAGS.log_dir_ + '/model.ckpt', global_step=step)
-            writer.flush()
+            #writer.flush()
             sv.request_stop()
             sv.stop()
 
