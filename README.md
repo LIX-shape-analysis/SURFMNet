@@ -1,6 +1,6 @@
 # SURFMNet
 
-Source code and data associated with the ICCV'19 oral paper "Unsupervised Deep Learning for Structured Shape Matching". A cleaner and object oriented code is available at https://github.com/Not-IITian/SURFMNet-Object_oriented
+Source code and data associated with the ICCV'19 oral paper "Unsupervised Deep Learning for Structured Shape Matching". A cleaner  code is available at https://github.com/Not-IITian/SURFMNet-Object_oriented
 
 ### Dependency
 
